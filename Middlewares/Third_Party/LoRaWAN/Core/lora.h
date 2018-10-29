@@ -91,7 +91,8 @@ typedef struct
   uint8_t BuffSize;
   /*Port on which the LoRa App is data is sent/ received*/
   uint8_t Port;
-  
+  /*Rx RSSI*/
+	int16_t Rssi;
 } lora_AppData_t;
 
 

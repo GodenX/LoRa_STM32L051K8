@@ -122,9 +122,7 @@ static void LoraStartTx(TxEventType_t EventType);
 /* tx timer callback function*/
 static void OnTxTimerEvent( void );
 
-
-static void TestStart( void );
-static void OnTestTimerEvent( void );
+static void SendData(const char *data);
 
 /* Private variables ---------------------------------------------------------*/
 /* load Main call backs structure*/
@@ -138,13 +136,13 @@ static LoRaMainCallback_t LoRaMainCallbacks = { HW_GetBatteryLevel,
                                                 LORA_TxNeeded};
                                                
 static TimerEvent_t TxTimer;
-static TimerEvent_t TestTimer;
 /* !
  *Initialises the Lora Parameters
  */
 static  LoRaParam_t LoRaParamInit= {LORAWAN_ADR_STATE,
                                     LORAWAN_DEFAULT_DATA_RATE,  
                                     LORAWAN_PUBLIC_NETWORK};
+
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -156,6 +154,7 @@ static  LoRaParam_t LoRaParamInit= {LORAWAN_ADR_STATE,
 int main( void )
 {
 	volatile uint8_t readdata;
+	
   /* STM32 HAL library initialization*/
   HAL_Init();
   
@@ -187,8 +186,6 @@ int main( void )
   
 	LORA_Join();
   
-//	TestStart( );
-	
   LoraStartTx( TX_ON_TIMER );
   
   while( 1 )
@@ -220,7 +217,7 @@ static void LORA_HasJoined( void )
 static void Send( void )
 {
   /* USER CODE BEGIN 3 */
-	uint8_t i;
+	char databuff[] = {0x30};
   if ( LORA_JoinStatus () != LORA_SET)
   {
     /*Not joined, try again later*/
@@ -228,14 +225,7 @@ static void Send( void )
     return;
   }
 	
-  AppData.Buff[i++] = 'T';
-	AppData.Buff[i++] = 'e';
-	AppData.Buff[i++] = 's';
-	AppData.Buff[i++] = 't';
-	PRINTF("\n\rSEND %s\n\r", AppData.Buff);
-	AppData.BuffSize = 5;
-	AppData.Port = LORAWAN_APP_PORT;
-  LORA_send( &AppData, LORAWAN_DEFAULT_CONFIRM_MSG_STATE);
+	SendData(databuff);
   
   /* USER CODE END 3 */
 }
@@ -244,7 +234,8 @@ static void Send( void )
 static void LORA_RxData( lora_AppData_t *AppData )
 {
   /* USER CODE BEGIN 4 */
-  PRINTF("LoRaRxData: Port: %d, Size: %d\n\r", AppData->Port, AppData->BuffSize);
+	PRINTF("Tx RSSI: %s\n\r", AppData->Buff);
+	PRINTF("Rx RSSI: %d\n\r", AppData->Rssi);
   /* USER CODE END 4 */
 }
 
@@ -291,22 +282,17 @@ static void LORA_TxNeeded ( void )
   LORA_send( &AppData, LORAWAN_UNCONFIRMED_MSG);
 }
 
-
-static void TestStart( void )
+static void SendData(const char *data)
 {
-  /* send everytime timer elap                                                                           ses */
-  TimerInit( &TestTimer, OnTestTimerEvent );
-  TimerSetValue( &TestTimer, 1000 );
-	TimerStart( &TestTimer );
-}
-
-static void OnTestTimerEvent( void )
-{
-	static uint8_t i;
-	PRINTF("Test %d\n\r", i);
-	i++;
-	/*Wait for next tx slot*/
-	TestStart(  );
+	uint8_t i;
+	for (i = 0; i < strlen(data); i++)
+	{
+		AppData.Buff[i] = data[i];
+	}
+	TVL1( PRINTF("\n\rSendData: %s DataSize: %d\n\r", data, i); )
+	AppData.BuffSize = i;
+	AppData.Port = LORAWAN_APP_PORT;
+  LORA_send( &AppData, LORAWAN_DEFAULT_CONFIRM_MSG_STATE);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

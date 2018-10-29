@@ -286,7 +286,9 @@ static void McpsIndication( McpsIndication_t *mcpsIndication )
           AppData.Port = mcpsIndication->Port;
           AppData.BuffSize = mcpsIndication->BufferSize;
           AppData.Buff = mcpsIndication->Buffer;
-        
+					// Get Rx RSSI
+					AppData.Rssi = mcpsIndication->Rssi;
+				
           LoRaMainCallbacks->LORA_RxData( &AppData );
           break;
       }
@@ -880,7 +882,7 @@ static void TraceDownLinkFrame(McpsIndication_t *mcpsIndication)
         // Divide by 4
         snr = ( mcpsIndication->Snr & 0xFF ) >> 2;
     }
-
+		
     TVL2( PRINTF("\r\n" );)
     TVL2( PRINTNOW(); PRINTF("#= D/L FRAME %lu =# RxWin %s, Port %d, data size %d, rssi %d, snr %ld\r\n\r\n", \
                              mcpsIndication->DownLinkCounter, \
