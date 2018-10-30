@@ -48,7 +48,6 @@
 #include "hw.h"
 #include "low_power_manager.h"
 #include "lora.h"
-#include "bsp.h"
 #include "timeServer.h"
 #include "vcom.h"
 #include "version.h"
@@ -142,7 +141,6 @@ static TimerEvent_t TxTimer;
 static  LoRaParam_t LoRaParamInit= {LORAWAN_ADR_STATE,
                                     LORAWAN_DEFAULT_DATA_RATE,  
                                     LORAWAN_PUBLIC_NETWORK};
-
 
 /* Private functions ---------------------------------------------------------*/
 

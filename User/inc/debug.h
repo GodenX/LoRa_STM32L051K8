@@ -63,6 +63,17 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
+#ifdef DEBUG
+struct Test
+{
+	int32_t test1;
+	int32_t test2;
+	int32_t test3;
+	int32_t test4;
+	int32_t test5;
+};
+extern struct Test test;
+#endif /* DEBUG */
 /* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */ 
 

@@ -323,7 +323,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
+            <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
@@ -334,7 +334,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32L051xx,REGION_CN470,DEBUG,WSL305S</Define>
               <Undefine></Undefine>
               <IncludePath>../User/inc;../Drivers/STM32L0xx_HAL_Driver/Inc;../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32L0xx/Include;../Drivers/CMSIS/Include;../Drivers/Components/sx1276;../Middlewares/Third_Party/LoRaWAN/Core;../Middlewares/Third_Party/LoRaWAN/Mac;../Middlewares/Third_Party/LoRaWAN/Mac/region;../Middlewares/Third_Party/LoRaWAN/Utilities;../Middlewares/Third_Party/LoRaWAN/Crypto;../Middlewares/Third_Party/LoRaWAN/Conf;../Middlewares/Third_Party/LoRaWAN/Conf/Inc;../Middlewares/Third_Party/LoRaWAN/Phy;../Core/inc;../Drivers/WSL305S</IncludePath>
