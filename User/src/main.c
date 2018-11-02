@@ -234,6 +234,7 @@ static void LORA_RxData( lora_AppData_t *AppData )
   /* USER CODE BEGIN 4 */
 	PRINTF("Tx RSSI: %s\n\r", AppData->Buff);
 	PRINTF("Rx RSSI: %d\n\r", AppData->Rssi);
+	memset1(AppData->Buff, 0x00, AppData->BuffSize);
   /* USER CODE END 4 */
 }
 

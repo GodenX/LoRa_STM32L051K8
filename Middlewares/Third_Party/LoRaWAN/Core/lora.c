@@ -831,7 +831,7 @@ static void TraceUpLinkFrame(McpsConfirm_t *mcpsConfirm)
 
     mibReq.Type = MIB_DEVICE_CLASS;
     LoRaMacMibGetRequestConfirm( &mibReq );
-  
+		PRINTF("UpLinkCounter: %d\n\r", mcpsConfirm->UpLinkCounter);
     TVL2( PRINTF("\r\n" );)
     TVL2( PRINTNOW(); PRINTF("#= U/L FRAME %lu =# Class %c, Port %d, data size %d, pwr %d, ", \
                              mcpsConfirm->UpLinkCounter, \

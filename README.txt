@@ -11,11 +11,11 @@ IDE : Keil_v5
 
 Change Log:
 
--- F-ICM-02-1810181(18/10/2018):
+-- 44211200 - WSL305S(Nov 2 2018 15:57:45):
 	-- First Commit
 
 
 Author         : Jackie Yang
 Email          : jackie.yang@liteon.com
 Tel            : 86-0519-83068888 Ext 20013
-Date           : 18/10/2018
+Date           : 02/11/2018
